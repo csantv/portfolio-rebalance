@@ -17,4 +17,7 @@ class Position(TypedDict):
 class ValuedPosition(Position):
     last_price: Decimal
     ask_price: Decimal
+    current_value: Decimal
     current_weight: Decimal
+
+type ExchangeRates = dict[str, Decimal]
