@@ -1,3 +1,4 @@
+from decimal import Decimal
 from typing import NotRequired, TypedDict
 
 
@@ -9,10 +10,11 @@ class Portfolio(TypedDict):
 class Position(TypedDict):
     symbol: str
     shares: int
-    target: float
+    target: Decimal
     currency: NotRequired[str]
     exchange: NotRequired[str]
 
 class ValuedPosition(Position):
-    price: float
-    current_weight: float
+    last_price: Decimal
+    ask_price: Decimal
+    current_weight: Decimal
