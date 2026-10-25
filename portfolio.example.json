@@ -1,0 +1,34 @@
+{
+  "currency": "USD",
+  "exchange": "NASDAQ",
+  "positions": [
+    {
+      "symbol": "META",
+      "shares": 20,
+      "target": 0.20
+    },
+    {
+      "symbol": "NVDA",
+      "shares": 100,
+      "target": 0.30
+    },
+    {
+      "symbol": "MSFT",
+      "shares": 30,
+      "target": 0.25
+    },
+    {
+      "symbol": "SCHD",
+      "shares": 150,
+      "target": 0.15,
+      "exchange": "NYSEARCA"
+    },
+    {
+      "symbol": "SHEL",
+      "shares": 40,
+      "target": 0.10,
+      "exchange": "LSE",
+      "currency": "GBP"
+    }
+  ]
+}
