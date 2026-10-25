@@ -19,6 +19,11 @@ def fetch_exchange_rates(main_currency: str, other_currencies: list[str]):
         for item in response.json()
     })
 
+    print("=== Fetched reference exchange rates ===")
+    for currency, rate in exchange_rates.items():
+        print(f"{currency}{main_currency} -> {rate:.6f}")
+    print("")
+
 def calculate_weights(positions: list[ValuedPosition]):
     portfolio_value = Decimal(0)
     for pos in positions:
@@ -51,4 +56,4 @@ def read_portfolio():
         calculate_weights(valued_positions)
 
         for position in valued_positions:
-            print(f'Symbol {position["symbol"]} has weight {position["current_weight"]:.4f}')
+            print(f'Symbol {position["symbol"]} has weight {position["current_weight"]:.4f} with {position["shares"]} shares at {position["last_price"]:.2f}')
