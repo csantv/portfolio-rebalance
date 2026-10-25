@@ -38,22 +38,22 @@ def calculate_weights(positions: list[ValuedPosition]):
     print(f"\nPortfolio value: {portfolio_value:.2f}\n")
 
 def read_portfolio():
+    portfolio: Portfolio
     with open("./portfolio.json", "r") as file:
-        portfolio: Portfolio = json.load(file, parse_float=Decimal)
-        main_currency = portfolio["currency"]
-        currencies = [pos["currency"] for pos in portfolio["positions"] if pos.get("currency")]
-        fetch_exchange_rates(main_currency, currencies)
-        valued_positions = [
-            ValuedPosition(**position, last_price=Decimal(0), ask_price=Decimal(0), current_weight=Decimal(0))
-            for position in portfolio["positions"]
-        ]
-        for position in valued_positions:
-            currency = position.get("currency", main_currency)
-            position["last_price"], position["ask_price"] = map(Decimal,
-                input(f'Enter the last price and ask price for {position['symbol']} ({currency}): ').split()
-            )
+        portfolio = json.load(file, parse_float=Decimal)
+    main_currency = portfolio["currency"]
+    currencies = [pos["currency"] for pos in portfolio["positions"] if pos.get("currency")]
+    fetch_exchange_rates(main_currency, currencies)
+    valued_positions = [
+        ValuedPosition(**position, last_price=Decimal(0), ask_price=Decimal(0), current_weight=Decimal(0))
+        for position in portfolio["positions"]
+    ]
+    for position in valued_positions:
+        currency = position.get("currency", main_currency)
+        position["last_price"], position["ask_price"] = map(Decimal,
+            input(f'Enter the last price and ask price for {position['symbol']} ({currency}): ').split()
+        )
+    calculate_weights(valued_positions)
 
-        calculate_weights(valued_positions)
-
-        for position in valued_positions:
-            print(f'Symbol {position["symbol"]} has weight {position["current_weight"]:.4f} with {position["shares"]} shares at {position["last_price"]:.2f}')
+    for position in valued_positions:
+        print(f'Symbol {position["symbol"]} has weight {position["current_weight"]:.4f} with {position["shares"]} shares at {position["last_price"]:.2f}')
