@@ -1,2 +1,4 @@
+from .percentage import read_portfolio
+
 def main() -> None:
-    print("Hello from portfolio-rebalance!")
+    read_portfolio()
